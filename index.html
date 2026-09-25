@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+
+<title>HARRY'S | Personel Paneli</title>
+
+<style>
+
+:root{
+    --bg:#070707;
+    --panel:#111;
+    --panel2:#171717;
+    --gold:#d6b36a;
+    --gold2:#f0d79c;
+    --text:#f4f1ea;
+    --muted:#8f8b84;
+    --green:#67c58a;
+    --red:#d95d5d;
+    --orange:#df9a4e;
+    --line:rgba(214,179,106,.16);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(214,179,106,.13),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+}
+
+button{
+    font:inherit;
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding:20px 15px 50px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:12px 0 22px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:110px;
+    max-height:55px;
+    object-fit:contain;
+}
+
+.title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.subtitle{
+    margin-top:3px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.connection{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    color:var(--muted);
+    font-size:11px;
+}
+
+.connection-dot{
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px rgba(103,197,138,.7);
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin:18px 0;
+}
+
+.stat{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    border-radius:15px;
+
+    padding:15px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.stat-value{
+    margin-top:6px;
+
+    font-size:24px;
+    font-weight:800;
+
+    color:var(--gold2);
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.section{
+    margin-top:25px;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:12px;
+}
+
+.section-title{
+    font-size:16px;
+    font-weight:800;
+}
+
+.section-count{
+    color:var(--muted);
+    font-size:11px;
+}
+
+
+/* =========================================
+   WAITER CALLS
+========================================= */
+
+.waiter-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.waiter-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(214,179,106,.10),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid rgba(214,179,106,.25);
+
+    border-radius:16px;
+}
+
+.waiter-info{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.waiter-icon{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:rgba(214,179,106,.12);
+
+    color:var(--gold2);
+
+    font-size:21px;
+}
+
+.table-number{
+    font-size:17px;
+    font-weight:800;
+}
+
+.request-time{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.handle-button{
+    border:0;
+
+    background:var(--gold);
+
+    color:#111;
+
+    border-radius:10px;
+
+    padding:10px 14px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+
+/* =========================================
+   ORDERS
+========================================= */
+
+.orders{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:12px;
+}
+
+.order-card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    border-radius:17px;
+
+    padding:15px;
+}
+
+.order-card.new{
+    border-color:
+        rgba(214,179,106,.35);
+
+    box-shadow:
+        0 0 25px rgba(214,179,106,.05);
+}
+
+.order-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+
+    margin-bottom:13px;
+}
+
+.order-table{
+    font-size:18px;
+    font-weight:900;
+}
+
+.order-time{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.status{
+    padding:6px 9px;
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+.status-pending{
+    background:rgba(214,179,106,.12);
+    color:var(--gold2);
+}
+
+.status-preparing{
+    background:rgba(223,154,78,.12);
+    color:var(--orange);
+}
+
+.status-ready{
+    background:rgba(103,197,138,.12);
+    color:var(--green);
+}
+
+.status-delivered{
+    background:rgba(255,255,255,.07);
+    color:#aaa;
+}
+
+.order-items{
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    padding-top:10px;
+}
+
+.order-item{
+    display:flex;
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:6px 0;
+
+    font-size:12px;
+}
+
+.order-item-name{
+    color:#ddd;
+}
+
+.order-item-qty{
+    color:var(--gold2);
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+.order-bottom{
+    margin-top:13px;
+
+    padding-top:12px;
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.payment{
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.total{
+    color:var(--gold2);
+
+    font-size:16px;
+
+    font-weight:900;
+}
+
+.order-actions{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:7px;
+
+    margin-top:12px;
+}
+
+.action-button{
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:#161616;
+
+    color:#bbb;
+
+    padding:9px 7px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.action-button:hover{
+    border-color:
+        rgba(214,179,106,.35);
+
+    color:var(--gold2);
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty{
+    padding:30px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    background:#101010;
+
+    border:
+        1px solid rgba(255,255,255,.05);
+
+    border-radius:15px;
+
+    font-size:12px;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error{
+    padding:20px;
+
+    color:#e6a0a0;
+
+    background:rgba(217,93,93,.05);
+
+    border:
+        1px solid rgba(217,93,93,.2);
+
+    border-radius:14px;
+
+    font-size:12px;
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
+
+    transform:
+        translate(-50%,20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    background:#f1eee7;
+
+    color:#111;
+
+    padding:12px 17px;
+
+    border-radius:11px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    transition:.25s;
+
+    z-index:999;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px){
+
+    .header{
+        align-items:flex-start;
+    }
+
+    .connection{
+        display:none;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .stat{
+        padding:12px;
+    }
+
+    .stat-value{
+        font-size:20px;
+    }
+
+    .orders{
+        grid-template-columns:1fr;
+    }
+
+    .waiter-card{
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <img
+                src="harrys-logo.png"
+                class="logo"
+                alt="HARRY'S"
+                onerror="this.style.display='none';"
+            >
+
+            <div>
+
+                <div class="title">
+                    Personel Paneli
+                </div>
+
+                <div class="subtitle">
+                    Night Order
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="connection">
+
+            <span class="connection-dot"></span>
+
+            Sistem aktif
+
+        </div>
+
+    </header>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Yeni Sipariş
+            </div>
+
+            <div
+                class="stat-value"
+                id="newOrderCount"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Hazırlanıyor
+            </div>
+
+            <div
+                class="stat-value"
+                id="preparingCount"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Garson Çağrısı
+            </div>
+
+            <div
+                class="stat-value"
+                id="waiterCount"
+            >
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WAITER REQUESTS -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                🔔 Garson Çağrıları
+            </div>
+
+            <div
+                class="section-count"
+                id="waiterSectionCount"
+            >
+                0 çağrı
+            </div>
+
+        </div>
+
+
+        <div
+            class="waiter-list"
+            id="waiterList"
+        >
+
+            <div class="empty">
+                Aktif garson çağrısı yok.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ORDERS -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                🛎 Siparişler
+            </div>
+
+            <div
+                class="section-count"
+                id="orderSectionCount"
+            >
+                0 sipariş
+            </div>
+
+        </div>
+
+
+        <div
+            class="orders"
+            id="orders"
+        >
+
+            <div class="empty">
+                Siparişler yükleniyor...
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    "https://qkevbwcwsbgftvgxgasy.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_l39-lwrk--GgVkKDFEoPIA_1pmKKPTu";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let orders = [];
+
+let orderItems = [];
+
+let waiterRequests = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function formatPrice(value){
+
+    return Number(value || 0)
+        .toLocaleString("tr-TR",{
+            style:"currency",
+            currency:"TRY"
+        });
+
+}
+
+
+function formatTime(date){
+
+    return new Date(date)
+        .toLocaleTimeString(
+            "tr-TR",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+}
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove("show");
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================================================
+   SUPABASE FETCH
+========================================================= */
+
+async function supabaseFetch(
+    path,
+    options={}
+){
+
+    const response =
+        await fetch(
+            SUPABASE_URL + path,
+            {
+                ...options,
+
+                headers:{
+                    "apikey":
+                        SUPABASE_ANON_KEY,
+
+                    "Authorization":
+                        `Bearer ${SUPABASE_ANON_KEY}`,
+
+                    "Content-Type":
+                        "application/json",
+
+                    ...(options.headers || {})
+                }
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    let data = null;
+
+
+    try{
+
+        data =
+            text
+                ? JSON.parse(text)
+                : null;
+
+    }catch{
+
+        data =
+            text;
+
+    }
+
+
+    if(!response.ok){
+
+        throw new Error(
+            data?.message ||
+            data?.details ||
+            text ||
+            "Supabase hatası"
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================================================
+   LOAD ORDERS
+========================================================= */
+
+async function loadOrders(){
+
+    const data =
+        await supabaseFetch(
+            "/rest/v1/orders" +
+            "?select=id,table_id,status,payment_method,note,total,created_at" +
+            "&order=created_at.desc" +
+            "&limit=100"
+        );
+
+
+    orders =
+        Array.isArray(data)
+            ? data
+            : [];
+
+
+    await loadOrderItems();
+
+}
+
+
+/* =========================================================
+   LOAD ORDER ITEMS
+========================================================= */
+
+async function loadOrderItems(){
+
+    if(!orders.length){
+
+        orderItems = [];
+
+        renderOrders();
+
+        return;
+
+    }
+
+
+    const ids =
+        orders
+            .map(order =>
+                String(order.id)
+            );
+
+
+    const filter =
+        ids
+            .map(id =>
+                `"${id}"`
+            )
+            .join(",");
+
+
+    const data =
+        await supabaseFetch(
+            `/rest/v1/order_items?order_id=in.(${filter})&select=order_id,product_name,quantity,unit_price,total`
+        );
+
+
+    orderItems =
+        Array.isArray(data)
+            ? data
+            : [];
+
+
+    renderOrders();
+
+}
+
+
+/* =========================================================
+   LOAD WAITER REQUESTS
+========================================================= */
+
+async function loadWaiterRequests(){
+
+    const data =
+        await supabaseFetch(
+            "/rest/v1/service_requests" +
+            "?status=eq.pending" +
+            "&request_type=eq.waiter" +
+            "&select=id,table_id,request_type,status,created_at" +
+            "&order=created_at.desc"
+        );
+
+
+    waiterRequests =
+        Array.isArray(data)
+            ? data
+            : [];
+
+
+    renderWaiterRequests();
+
+}
+
+
+/* =========================================================
+   RENDER WAITER REQUESTS
+========================================================= */
+
+function renderWaiterRequests(){
+
+    const list =
+        document.getElementById(
+            "waiterList"
+        );
+
+
+    const count =
+        waiterRequests.length;
+
+
+    document.getElementById(
+        "waiterCount"
+    ).textContent =
+        count;
+
+
+    document.getElementById(
+        "waiterSectionCount"
+    ).textContent =
+        `${count} çağrı`;
+
+
+    list.innerHTML = "";
+
+
+    if(!count){
+
+        list.innerHTML =
+            `<div class="empty">
+                Aktif garson çağrısı yok.
+            </div>`;
+
+        return;
+
+    }
+
+
+    waiterRequests.forEach(request => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "waiter-card";
+
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "waiter-info";
+
+
+        const icon =
+            document.createElement("div");
+
+        icon.className =
+            "waiter-icon";
+
+        icon.textContent =
+            "♟";
+
+
+        const text =
+            document.createElement("div");
+
+
+        const table =
+            document.createElement("div");
+
+        table.className =
+            "table-number";
+
+        table.textContent =
+            `Masa ${request.table_id}`;
+
+
+        const time =
+            document.createElement("div");
+
+        time.className =
+            "request-time";
+
+        time.textContent =
+            `${formatTime(request.created_at)} • Garson bekleniyor`;
+
+
+        text.appendChild(table);
+
+        text.appendChild(time);
+
+
+        info.appendChild(icon);
+
+        info.appendChild(text);
+
+
+        const button =
+            document.createElement("button");
+
+        button.type =
+            "button";
+
+        button.className =
+            "handle-button";
+
+        button.textContent =
+            "GÖRDÜM";
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                handleWaiterRequest(
+                    request.id
+                );
+
+            }
+        );
+
+
+        card.appendChild(info);
+
+        card.appendChild(button);
+
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   HANDLE WAITER REQUEST
+========================================================= */
+
+async function handleWaiterRequest(id){
+
+    try{
+
+        await supabaseFetch(
+            `/rest/v1/service_requests?id=eq.${encodeURIComponent(id)}`,
+            {
+                method:"PATCH",
+
+                headers:{
+                    "Prefer":
+                        "return=minimal"
+                },
+
+                body:JSON.stringify({
+
+                    status:
+                        "handled",
+
+                    handled_at:
+                        new Date().toISOString()
+
+                })
+            }
+        );
+
+
+        showToast(
+            "Garson çağrısı kapatıldı."
+        );
+
+
+        await loadWaiterRequests();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Çağrı kapatılamadı."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ORDER STATUS
+========================================================= */
+
+function statusText(status){
+
+    switch(status){
+
+        case "pending":
+            return "Yeni";
+
+        case "preparing":
+            return "Hazırlanıyor";
+
+        case "ready":
+            return "Hazır";
+
+        case "delivered":
+            return "Teslim Edildi";
+
+        case "cancelled":
+            return "İptal";
+
+        default:
+            return status || "Bilinmiyor";
+
+    }
+
+}
+
+
+function statusClass(status){
+
+    switch(status){
+
+        case "pending":
+            return "status-pending";
+
+        case "preparing":
+            return "status-preparing";
+
+        case "ready":
+            return "status-ready";
+
+        case "delivered":
+            return "status-delivered";
+
+        default:
+            return "status-pending";
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER ORDERS
+========================================================= */
+
+function renderOrders(){
+
+    const container =
+        document.getElementById(
+            "orders"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const newCount =
+        orders.filter(
+            order =>
+                order.status === "pending"
+        ).length;
+
+
+    const preparingCount =
+        orders.filter(
+            order =>
+                order.status === "preparing"
+        ).length;
+
+
+    document.getElementById(
+        "newOrderCount"
+    ).textContent =
+        newCount;
+
+
+    document.getElementById(
+        "preparingCount"
+    ).textContent =
+        preparingCount;
+
+
+    document.getElementById(
+        "orderSectionCount"
+    ).textContent =
+        `${orders.length} sipariş`;
+
+
+    if(!orders.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                Henüz sipariş yok.
+            </div>`;
+
+        return;
+
+    }
+
+
+    orders.forEach(order => {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "order-card";
+
+
+        if(order.status === "pending"){
+
+            card.classList.add("new");
+
+        }
+
+
+        /* TOP */
+
+        const top =
+            document.createElement("div");
+
+        top.className =
+            "order-top";
+
+
+        const tableBox =
+            document.createElement("div");
+
+
+        const table =
+            document.createElement("div");
+
+        table.className =
+            "order-table";
+
+        table.textContent =
+            `Masa ${order.table_id}`;
+
+
+        const time =
+            document.createElement("div");
+
+        time.className =
+            "order-time";
+
+        time.textContent =
+            formatTime(
+                order.created_at
+            );
+
+
+        tableBox.appendChild(table);
+
+        tableBox.appendChild(time);
+
+
+        const status =
+            document.createElement("div");
+
+        status.className =
+            `status ${statusClass(order.status)}`;
+
+        status.textContent =
+            statusText(order.status);
+
+
+        top.appendChild(tableBox);
+
+        top.appendChild(status);
+
+
+        /* ITEMS */
+
+        const itemsBox =
+            document.createElement("div");
+
+        itemsBox.className =
+            "order-items";
+
+
+        const items =
+            orderItems.filter(
+                item =>
+                    String(item.order_id) ===
+                    String(order.id)
+            );
+
+
+        if(!items.length){
+
+            const emptyItem =
+                document.createElement("div");
+
+            emptyItem.className =
+                "order-item";
+
+            emptyItem.textContent =
+                "Ürün bilgisi bulunamadı.";
+
+            itemsBox.appendChild(
+                emptyItem
+            );
+
+        }else{
+
+            items.forEach(item => {
+
+                const row =
+                    document.createElement("div");
+
+                row.className =
+                    "order-item";
+
+
+                const name =
+                    document.createElement("span");
+
+                name.className =
+                    "order-item-name";
+
+                name.textContent =
+                    item.product_name;
+
+
+                const qty =
+                    document.createElement("span");
+
+                qty.className =
+                    "order-item-qty";
+
+                qty.textContent =
+                    `${item.quantity} × ${formatPrice(item.unit_price)}`;
+
+
+                row.appendChild(name);
+
+                row.appendChild(qty);
+
+                itemsBox.appendChild(row);
+
+            });
+
+        }
+
+
+        /* BOTTOM */
+
+        const bottom =
+            document.createElement("div");
+
+        bottom.className =
+            "order-bottom";
+
+
+        const payment =
+            document.createElement("div");
+
+        payment.className =
+            "payment";
+
+        payment.textContent =
+            `Ödeme: ${order.payment_method || "-"}`;
+
+
+        const total =
+            document.createElement("div");
+
+        total.className =
+            "total";
+
+        total.textContent =
+            formatPrice(order.total);
+
+
+        bottom.appendChild(payment);
+
+        bottom.appendChild(total);
+
+
+        /* ACTIONS */
+
+        const actions =
+            document.createElement("div");
+
+        actions.className =
+            "order-actions";
+
+
+        if(order.status === "pending"){
+
+            actions.appendChild(
+                createActionButton(
+                    "Hazırlanıyor",
+                    () =>
+                        updateOrderStatus(
+                            order.id,
+                            "preparing"
+                        )
+                )
+            );
+
+        }
+
+
+        if(order.status === "preparing"){
+
+            actions.appendChild(
+                createActionButton(
+                    "Hazır",
+                    () =>
+                        updateOrderStatus(
+                            order.id,
+                            "ready"
+                        )
+                )
+            );
+
+        }
+
+
+        if(order.status === "ready"){
+
+            actions.appendChild(
+                createActionButton(
+                    "Teslim Edildi",
+                    () =>
+                        updateOrderStatus(
+                            order.id,
+                            "delivered"
+                        )
+                )
+            );
+
+        }
+
+
+        if(
+            order.status !== "delivered" &&
+            order.status !== "cancelled"
+        ){
+
+            actions.appendChild(
+                createActionButton(
+                    "İptal",
+                    () =>
+                        updateOrderStatus(
+                            order.id,
+                            "cancelled"
+                        )
+                )
+            );
+
+        }
+
+
+        card.appendChild(top);
+
+        card.appendChild(itemsBox);
+
+        card.appendChild(bottom);
+
+        card.appendChild(actions);
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+function createActionButton(
+    text,
+    action
+){
+
+    const button =
+        document.createElement("button");
+
+    button.type =
+        "button";
+
+    button.className =
+        "action-button";
+
+    button.textContent =
+        text;
+
+
+    button.addEventListener(
+        "click",
+        action
+    );
+
+
+    return button;
+
+}
+
+
+/* =========================================================
+   UPDATE ORDER STATUS
+========================================================= */
+
+async function updateOrderStatus(
+    orderId,
+    status
+){
+
+    try{
+
+        await supabaseFetch(
+            `/rest/v1/orders?id=eq.${encodeURIComponent(orderId)}`,
+            {
+                method:"PATCH",
+
+                headers:{
+                    "Prefer":
+                        "return=minimal"
+                },
+
+                body:JSON.stringify({
+
+                    status:
+                        status
+
+                })
+            }
+        );
+
+
+        showToast(
+            `Sipariş: ${statusText(status)}`
+        );
+
+
+        await loadOrders();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Sipariş durumu değiştirilemedi."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+async function startApp(){
+
+    try{
+
+        await Promise.all([
+            loadOrders(),
+            loadWaiterRequests()
+        ]);
+
+
+    }catch(error){
+
+        console.error(
+            "PANEL HATASI:",
+            error
+        );
+
+
+        document.getElementById(
+            "orders"
+        ).innerHTML = `
+
+            <div class="error">
+
+                Panel verileri yüklenemedi.
+
+                <br><br>
+
+                ${error.message}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+startApp();
+
+
+setInterval(
+    async () => {
+
+        try{
+
+            await Promise.all([
+                loadOrders(),
+                loadWaiterRequests()
+            ]);
+
+        }catch(error){
+
+            console.error(
+                "Otomatik güncelleme hatası:",
+                error
+            );
+
+        }
+
+    },
+    5000
+);
+
+</script>
+
+</body>
+</html>
