@@ -1168,6 +1168,43 @@ async function handleWaiterRequest(id){
     try{
 
         await supabaseFetch(
+            "/rest/v1/rpc/handle_waiter_request",
+            {
+                method: "POST",
+
+                headers:{
+                    "Prefer":
+                        "return=representation"
+                },
+
+                body: JSON.stringify({
+                    request_id: id
+                })
+            }
+        );
+
+        showToast(
+            "Garson çağrısı kapatıldı."
+        );
+
+        await loadWaiterRequests();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Çağrı kapatılamadı: " +
+            error.message
+        );
+
+    }
+
+}
+
+    try{
+
+        await supabaseFetch(
             `/rest/v1/service_requests?id=eq.${encodeURIComponent(id)}`,
             {
                 method:"PATCH",
