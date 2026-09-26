@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
@@ -20,7 +21,6 @@
     --green:#67c58a;
     --red:#d95d5d;
     --orange:#df9a4e;
-    --line:rgba(214,179,106,.16);
 }
 
 *{
@@ -29,6 +29,7 @@
 
 body{
     margin:0;
+
     background:
         radial-gradient(
             circle at 50% -10%,
@@ -279,6 +280,10 @@ button{
     cursor:pointer;
 }
 
+.handle-button:hover{
+    background:var(--gold2);
+}
+
 
 /* =========================================
    ORDERS
@@ -368,6 +373,11 @@ button{
 .status-delivered{
     background:rgba(255,255,255,.07);
     color:#aaa;
+}
+
+.status-cancelled{
+    background:rgba(217,93,93,.12);
+    color:var(--red);
 }
 
 .order-items{
@@ -589,6 +599,7 @@ button{
 }
 
 </style>
+
 </head>
 
 
@@ -1053,9 +1064,11 @@ function renderWaiterRequests(){
     if(!count){
 
         list.innerHTML =
-            `<div class="empty">
+            `
+            <div class="empty">
                 Aktif garson çağrısı yok.
-            </div>`;
+            </div>
+            `;
 
         return;
 
@@ -1161,6 +1174,7 @@ function renderWaiterRequests(){
 
 /* =========================================================
    HANDLE WAITER REQUEST
+   RPC VERSION
 ========================================================= */
 
 async function handleWaiterRequest(id){
@@ -1170,77 +1184,39 @@ async function handleWaiterRequest(id){
         await supabaseFetch(
             "/rest/v1/rpc/handle_waiter_request",
             {
-                method: "POST",
+                method:"POST",
 
                 headers:{
                     "Prefer":
                         "return=representation"
                 },
 
-                body: JSON.stringify({
-                    request_id: id
+                body:JSON.stringify({
+                    request_id:id
                 })
             }
         );
+
 
         showToast(
             "Garson çağrısı kapatıldı."
         );
 
+
         await loadWaiterRequests();
+
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "GARSON ÇAĞRISI HATASI:",
+            error
+        );
+
 
         showToast(
             "Çağrı kapatılamadı: " +
             error.message
-        );
-
-    }
-
-}
-
-    try{
-
-        await supabaseFetch(
-            `/rest/v1/service_requests?id=eq.${encodeURIComponent(id)}`,
-            {
-                method:"PATCH",
-
-                headers:{
-                    "Prefer":
-                        "return=minimal"
-                },
-
-                body:JSON.stringify({
-
-                    status:
-                        "handled",
-
-                    handled_at:
-                        new Date().toISOString()
-
-                })
-            }
-        );
-
-
-        showToast(
-            "Garson çağrısı kapatıldı."
-        );
-
-
-        await loadWaiterRequests();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "Çağrı kapatılamadı."
         );
 
     }
@@ -1294,6 +1270,9 @@ function statusClass(status){
 
         case "delivered":
             return "status-delivered";
+
+        case "cancelled":
+            return "status-cancelled";
 
         default:
             return "status-pending";
@@ -1353,9 +1332,11 @@ function renderOrders(){
     if(!orders.length){
 
         container.innerHTML =
-            `<div class="empty">
+            `
+            <div class="empty">
                 Henüz sipariş yok.
-            </div>`;
+            </div>
+            `;
 
         return;
 
@@ -1646,11 +1627,14 @@ function createActionButton(
     const button =
         document.createElement("button");
 
+
     button.type =
         "button";
 
+
     button.className =
         "action-button";
+
 
     button.textContent =
         text;
@@ -1708,7 +1692,11 @@ async function updateOrderStatus(
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "SİPARİŞ DURUMU HATASI:",
+            error
+        );
+
 
         showToast(
             "Sipariş durumu değiştirilemedi."
@@ -1720,7 +1708,7 @@ async function updateOrderStatus(
 
 
 /* =========================================================
-   START
+   START APP
 ========================================================= */
 
 async function startApp(){
@@ -1733,6 +1721,10 @@ async function startApp(){
         ]);
 
 
+        console.log(
+            "NIGHT ORDER STAFF PANEL AKTİF"
+        );
+
     }catch(error){
 
         console.error(
@@ -1743,8 +1735,8 @@ async function startApp(){
 
         document.getElementById(
             "orders"
-        ).innerHTML = `
-
+        ).innerHTML =
+            `
             <div class="error">
 
                 Panel verileri yüklenemedi.
@@ -1754,8 +1746,7 @@ async function startApp(){
                 ${error.message}
 
             </div>
-
-        `;
+            `;
 
     }
 
@@ -1763,11 +1754,15 @@ async function startApp(){
 
 
 /* =========================================================
-   AUTO REFRESH
+   INITIAL LOAD
 ========================================================= */
 
 startApp();
 
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
 
 setInterval(
     async () => {
