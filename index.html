@@ -49,9 +49,183 @@ body{
         sans-serif;
 }
 
-button{
+button,
+input{
     font:inherit;
 }
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-screen{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:390px;
+
+    padding:30px 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+
+    border:
+        1px solid rgba(214,179,106,.18);
+
+    border-radius:22px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.5);
+}
+
+.login-logo{
+    width:150px;
+    max-height:70px;
+
+    display:block;
+
+    object-fit:contain;
+
+    margin:0 auto 22px;
+}
+
+.login-title{
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    letter-spacing:.3px;
+}
+
+.login-subtitle{
+    text-align:center;
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.login-form{
+    margin-top:25px;
+}
+
+.login-label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+}
+
+.login-input{
+    width:100%;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    background:#0d0d0d;
+
+    color:var(--text);
+
+    border-radius:11px;
+
+    padding:13px 12px;
+
+    outline:none;
+
+    margin-bottom:15px;
+}
+
+.login-input:focus{
+    border-color:
+        rgba(214,179,106,.5);
+}
+
+.login-button{
+    width:100%;
+
+    border:0;
+
+    background:var(--gold);
+
+    color:#111;
+
+    border-radius:11px;
+
+    padding:13px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    margin-top:4px;
+}
+
+.login-button:hover{
+    background:var(--gold2);
+}
+
+.login-button:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
+}
+
+.login-error{
+    margin-top:14px;
+
+    padding:11px 12px;
+
+    background:
+        rgba(217,93,93,.07);
+
+    border:
+        1px solid rgba(217,93,93,.2);
+
+    color:#e6a0a0;
+
+    border-radius:10px;
+
+    font-size:11px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================
+   APP
+========================================= */
 
 .app{
     max-width:1100px;
@@ -98,6 +272,12 @@ button{
     font-size:11px;
 }
 
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
 .connection{
     display:flex;
     align-items:center;
@@ -117,6 +297,30 @@ button{
 
     box-shadow:
         0 0 10px rgba(103,197,138,.7);
+}
+
+.logout-button{
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    background:#151515;
+
+    color:#aaa;
+
+    border-radius:9px;
+
+    padding:8px 11px;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+.logout-button:hover{
+    border-color:
+        rgba(217,93,93,.35);
+
+    color:#e6a0a0;
 }
 
 
@@ -276,8 +480,6 @@ button{
     font-size:12px;
 
     font-weight:800;
-
-    cursor:pointer;
 }
 
 .handle-button:hover{
@@ -462,8 +664,6 @@ button{
 
     border-radius:9px;
 
-    cursor:pointer;
-
     font-size:10px;
 
     font-weight:700;
@@ -571,8 +771,16 @@ button{
         align-items:flex-start;
     }
 
+    .header-right{
+        gap:8px;
+    }
+
     .connection{
         display:none;
+    }
+
+    .logout-button{
+        padding:7px 9px;
     }
 
     .stats{
@@ -605,7 +813,102 @@ button{
 
 <body>
 
-<div class="app">
+
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
+
+<div
+    class="login-screen"
+    id="loginScreen"
+>
+
+    <div class="login-box">
+
+        <img
+            src="harrys-logo.png"
+            class="login-logo"
+            alt="HARRY'S"
+            onerror="this.style.display='none';"
+        >
+
+        <div class="login-title">
+            Personel Girişi
+        </div>
+
+        <div class="login-subtitle">
+            Night Order • HARRY'S
+        </div>
+
+
+        <form
+            class="login-form"
+            id="loginForm"
+        >
+
+            <label
+                class="login-label"
+                for="email"
+            >
+                E-posta
+            </label>
+
+            <input
+                id="email"
+                class="login-input"
+                type="email"
+                autocomplete="username"
+                placeholder="personel@ornek.com"
+                required
+            >
+
+
+            <label
+                class="login-label"
+                for="password"
+            >
+                Şifre
+            </label>
+
+            <input
+                id="password"
+                class="login-input"
+                type="password"
+                autocomplete="current-password"
+                placeholder="••••••••"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                GİRİŞ YAP
+            </button>
+
+
+            <div
+                class="login-error hidden"
+                id="loginError"
+            ></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     STAFF APP
+========================================================= -->
+
+<div
+    class="app hidden"
+    id="app"
+>
 
 
     <!-- HEADER -->
@@ -636,11 +939,24 @@ button{
         </div>
 
 
-        <div class="connection">
+        <div class="header-right">
 
-            <span class="connection-dot"></span>
+            <div class="connection">
 
-            Sistem aktif
+                <span class="connection-dot"></span>
+
+                Sistem aktif
+
+            </div>
+
+
+            <button
+                type="button"
+                class="logout-button"
+                id="logoutButton"
+            >
+                ÇIKIŞ
+            </button>
 
         </div>
 
@@ -778,6 +1094,13 @@ button{
 ></div>
 
 
+<!-- =========================================================
+     SUPABASE JS
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
 
 /* =========================================================
@@ -790,6 +1113,16 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
     "sb_publishable_l39-lwrk--GgVkKDFEoPIA_1pmKKPTu";
 
+const {
+    createClient
+} = window.supabase;
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
 
 /* =========================================================
    STATE
@@ -801,6 +1134,43 @@ let orderItems = [];
 
 let waiterRequests = [];
 
+let refreshTimer = null;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const loginScreen =
+    document.getElementById(
+        "loginScreen"
+    );
+
+const app =
+    document.getElementById(
+        "app"
+    );
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+const loginError =
+    document.getElementById(
+        "loginError"
+    );
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
 
 /* =========================================================
    HELPERS
@@ -809,10 +1179,13 @@ let waiterRequests = [];
 function formatPrice(value){
 
     return Number(value || 0)
-        .toLocaleString("tr-TR",{
-            style:"currency",
-            currency:"TRY"
-        });
+        .toLocaleString(
+            "tr-TR",
+            {
+                style:"currency",
+                currency:"TRY"
+            }
+        );
 
 }
 
@@ -834,12 +1207,16 @@ function formatTime(date){
 function showToast(message){
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
     toast.textContent =
         message;
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
     clearTimeout(
         window.toastTimer
@@ -849,7 +1226,9 @@ function showToast(message){
         setTimeout(
             () => {
 
-                toast.classList.remove("show");
+                toast.classList.remove(
+                    "show"
+                );
 
             },
             2500
@@ -858,74 +1237,316 @@ function showToast(message){
 }
 
 
-/* =========================================================
-   SUPABASE FETCH
-========================================================= */
+function showLoginError(message){
 
-async function supabaseFetch(
-    path,
-    options={}
-){
+    loginError.textContent =
+        message;
 
-    const response =
-        await fetch(
-            SUPABASE_URL + path,
-            {
-                ...options,
-
-                headers:{
-                    "apikey":
-                        SUPABASE_ANON_KEY,
-
-                    "Authorization":
-                        `Bearer ${SUPABASE_ANON_KEY}`,
-
-                    "Content-Type":
-                        "application/json",
-
-                    ...(options.headers || {})
-                }
-            }
-        );
-
-
-    const text =
-        await response.text();
-
-
-    let data = null;
-
-
-    try{
-
-        data =
-            text
-                ? JSON.parse(text)
-                : null;
-
-    }catch{
-
-        data =
-            text;
-
-    }
-
-
-    if(!response.ok){
-
-        throw new Error(
-            data?.message ||
-            data?.details ||
-            text ||
-            "Supabase hatası"
-        );
-
-    }
-
-
-    return data;
+    loginError.classList.remove(
+        "hidden"
+    );
 
 }
+
+
+function hideLoginError(){
+
+    loginError.textContent =
+        "";
+
+    loginError.classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function showApp(){
+
+    loginScreen.classList.add(
+        "hidden"
+    );
+
+    app.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function showLogin(){
+
+    app.classList.add(
+        "hidden"
+    );
+
+    loginScreen.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function stopRefresh(){
+
+    if(refreshTimer){
+
+        clearInterval(
+            refreshTimer
+        );
+
+        refreshTimer =
+            null;
+
+    }
+
+}
+
+
+function startRefresh(){
+
+    stopRefresh();
+
+    refreshTimer =
+        setInterval(
+            async () => {
+
+                const {
+                    data
+                } =
+                    await supabase.auth
+                        .getSession();
+
+
+                if(
+                    !data ||
+                    !data.session
+                ){
+
+                    stopRefresh();
+
+                    showLogin();
+
+                    return;
+
+                }
+
+
+                try{
+
+                    await Promise.all([
+                        loadOrders(),
+                        loadWaiterRequests()
+                    ]);
+
+                }catch(error){
+
+                    console.error(
+                        "Otomatik güncelleme hatası:",
+                        error
+                    );
+
+                }
+
+            },
+            5000
+        );
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+loginForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+        hideLoginError();
+
+        loginButton.disabled =
+            true;
+
+        loginButton.textContent =
+            "GİRİŞ YAPILIYOR...";
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        try{
+
+            const {
+                data,
+                error
+            } =
+                await supabase.auth
+                    .signInWithPassword({
+                        email,
+                        password
+                    });
+
+
+            if(error){
+
+                throw error;
+
+            }
+
+
+            if(
+                !data ||
+                !data.user
+            ){
+
+                throw new Error(
+                    "Giriş yapılamadı."
+                );
+
+            }
+
+
+            showApp();
+
+            showToast(
+                "Personel girişi başarılı."
+            );
+
+
+            await startApp();
+
+
+        }catch(error){
+
+            console.error(
+                "GİRİŞ HATASI:",
+                error
+            );
+
+
+            showLoginError(
+                error.message ||
+                "E-posta veya şifre hatalı."
+            );
+
+
+        }finally{
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "GİRİŞ YAP";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutButton.addEventListener(
+    "click",
+    async () => {
+
+        stopRefresh();
+
+
+        const {
+            error
+        } =
+            await supabase.auth
+                .signOut();
+
+
+        if(error){
+
+            console.error(
+                "ÇIKIŞ HATASI:",
+                error
+            );
+
+            showToast(
+                "Çıkış yapılamadı."
+            );
+
+            return;
+
+        }
+
+
+        orders = [];
+
+        orderItems = [];
+
+        waiterRequests = [];
+
+
+        showLogin();
+
+
+        document.getElementById(
+            "password"
+        ).value = "";
+
+
+        showToast(
+            "Oturum kapatıldı."
+        );
+
+    }
+);
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabase.auth.onAuthStateChange(
+    async (
+        event,
+        session
+    ) => {
+
+        console.log(
+            "AUTH:",
+            event
+        );
+
+
+        if(session){
+
+            showApp();
+
+        }else{
+
+            stopRefresh();
+
+            showLogin();
+
+        }
+
+    }
+);
 
 
 /* =========================================================
@@ -934,13 +1555,29 @@ async function supabaseFetch(
 
 async function loadOrders(){
 
-    const data =
-        await supabaseFetch(
-            "/rest/v1/orders" +
-            "?select=id,table_id,status,payment_method,note,total,created_at" +
-            "&order=created_at.desc" +
-            "&limit=100"
-        );
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("orders")
+            .select(
+                "id,table_id,status,payment_method,note,total,created_at"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            )
+            .limit(100);
+
+
+    if(error){
+
+        throw error;
+
+    }
 
 
     orders =
@@ -972,24 +1609,32 @@ async function loadOrderItems(){
 
 
     const ids =
-        orders
-            .map(order =>
-                String(order.id)
+        orders.map(
+            order =>
+                order.id
+        );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("order_items")
+            .select(
+                "order_id,product_name,quantity,unit_price,total"
+            )
+            .in(
+                "order_id",
+                ids
             );
 
 
-    const filter =
-        ids
-            .map(id =>
-                `"${id}"`
-            )
-            .join(",");
+    if(error){
 
+        throw error;
 
-    const data =
-        await supabaseFetch(
-            `/rest/v1/order_items?order_id=in.(${filter})&select=order_id,product_name,quantity,unit_price,total`
-        );
+    }
 
 
     orderItems =
@@ -1009,14 +1654,36 @@ async function loadOrderItems(){
 
 async function loadWaiterRequests(){
 
-    const data =
-        await supabaseFetch(
-            "/rest/v1/service_requests" +
-            "?status=eq.pending" +
-            "&request_type=eq.waiter" +
-            "&select=id,table_id,request_type,status,created_at" +
-            "&order=created_at.desc"
-        );
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("service_requests")
+            .select(
+                "id,table_id,request_type,status,created_at"
+            )
+            .eq(
+                "status",
+                "pending"
+            )
+            .eq(
+                "request_type",
+                "waiter"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+    if(error){
+
+        throw error;
+
+    }
 
 
     waiterRequests =
@@ -1075,126 +1742,151 @@ function renderWaiterRequests(){
     }
 
 
-    waiterRequests.forEach(request => {
+    waiterRequests.forEach(
+        request => {
 
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "waiter-card";
-
-
-        const info =
-            document.createElement("div");
-
-        info.className =
-            "waiter-info";
-
-
-        const icon =
-            document.createElement("div");
-
-        icon.className =
-            "waiter-icon";
-
-        icon.textContent =
-            "♟";
-
-
-        const text =
-            document.createElement("div");
-
-
-        const table =
-            document.createElement("div");
-
-        table.className =
-            "table-number";
-
-        table.textContent =
-            `Masa ${request.table_id}`;
-
-
-        const time =
-            document.createElement("div");
-
-        time.className =
-            "request-time";
-
-        time.textContent =
-            `${formatTime(request.created_at)} • Garson bekleniyor`;
-
-
-        text.appendChild(table);
-
-        text.appendChild(time);
-
-
-        info.appendChild(icon);
-
-        info.appendChild(text);
-
-
-        const button =
-            document.createElement("button");
-
-        button.type =
-            "button";
-
-        button.className =
-            "handle-button";
-
-        button.textContent =
-            "GÖRDÜM";
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                handleWaiterRequest(
-                    request.id
+            const card =
+                document.createElement(
+                    "div"
                 );
 
-            }
-        );
+            card.className =
+                "waiter-card";
 
 
-        card.appendChild(info);
+            const info =
+                document.createElement(
+                    "div"
+                );
 
-        card.appendChild(button);
+            info.className =
+                "waiter-info";
 
 
-        list.appendChild(card);
+            const icon =
+                document.createElement(
+                    "div"
+                );
 
-    });
+            icon.className =
+                "waiter-icon";
+
+            icon.textContent =
+                "♟";
+
+
+            const text =
+                document.createElement(
+                    "div"
+                );
+
+
+            const table =
+                document.createElement(
+                    "div"
+                );
+
+            table.className =
+                "table-number";
+
+            table.textContent =
+                `Masa ${request.table_id}`;
+
+
+            const time =
+                document.createElement(
+                    "div"
+                );
+
+            time.className =
+                "request-time";
+
+            time.textContent =
+                `${formatTime(request.created_at)} • Garson bekleniyor`;
+
+
+            text.appendChild(table);
+
+            text.appendChild(time);
+
+
+            info.appendChild(icon);
+
+            info.appendChild(text);
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.type =
+                "button";
+
+            button.className =
+                "handle-button";
+
+            button.textContent =
+                "GÖRDÜM";
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    handleWaiterRequest(
+                        request.id
+                    );
+
+                }
+            );
+
+
+            card.appendChild(info);
+
+            card.appendChild(button);
+
+
+            list.appendChild(card);
+
+        }
+    );
 
 }
 
 
 /* =========================================================
    HANDLE WAITER REQUEST
-   RPC VERSION
+   SECURE RPC
 ========================================================= */
 
 async function handleWaiterRequest(id){
 
     try{
 
-        await supabaseFetch(
-            "/rest/v1/rpc/handle_waiter_request",
-            {
-                method:"POST",
+        const {
+            data,
+            error
+        } =
+            await supabase
+                .rpc(
+                    "handle_waiter_request",
+                    {
+                        request_id:id
+                    }
+                );
 
-                headers:{
-                    "Prefer":
-                        "return=representation"
-                },
 
-                body:JSON.stringify({
-                    request_id:id
-                })
-            }
+        if(error){
+
+            throw error;
+
+        }
+
+
+        console.log(
+            "Garson çağrısı:",
+            data
         );
 
 
@@ -1215,8 +1907,7 @@ async function handleWaiterRequest(id){
 
 
         showToast(
-            "Çağrı kapatılamadı: " +
-            error.message
+            "Çağrı kapatılamadı."
         );
 
     }
@@ -1243,6 +1934,9 @@ function statusText(status){
 
         case "delivered":
             return "Teslim Edildi";
+
+        case "completed":
+            return "Tamamlandı";
 
         case "cancelled":
             return "İptal";
@@ -1343,274 +2037,357 @@ function renderOrders(){
     }
 
 
-    orders.forEach(order => {
+    orders.forEach(
+        order => {
 
-        const card =
-            document.createElement("div");
-
-
-        card.className =
-            "order-card";
-
-
-        if(order.status === "pending"){
-
-            card.classList.add("new");
-
-        }
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        /* TOP */
-
-        const top =
-            document.createElement("div");
-
-        top.className =
-            "order-top";
+            card.className =
+                "order-card";
 
 
-        const tableBox =
-            document.createElement("div");
+            if(
+                order.status === "pending"
+            ){
+
+                card.classList.add(
+                    "new"
+                );
+
+            }
 
 
-        const table =
-            document.createElement("div");
+            /* TOP */
 
-        table.className =
-            "order-table";
+            const top =
+                document.createElement(
+                    "div"
+                );
 
-        table.textContent =
-            `Masa ${order.table_id}`;
+            top.className =
+                "order-top";
 
 
-        const time =
-            document.createElement("div");
+            const tableBox =
+                document.createElement(
+                    "div"
+                );
 
-        time.className =
-            "order-time";
 
-        time.textContent =
-            formatTime(
-                order.created_at
+            const table =
+                document.createElement(
+                    "div"
+                );
+
+            table.className =
+                "order-table";
+
+            table.textContent =
+                `Masa ${order.table_id}`;
+
+
+            const time =
+                document.createElement(
+                    "div"
+                );
+
+            time.className =
+                "order-time";
+
+            time.textContent =
+                formatTime(
+                    order.created_at
+                );
+
+
+            tableBox.appendChild(
+                table
+            );
+
+            tableBox.appendChild(
+                time
             );
 
 
-        tableBox.appendChild(table);
+            const status =
+                document.createElement(
+                    "div"
+                );
 
-        tableBox.appendChild(time);
+            status.className =
+                `status ${statusClass(order.status)}`;
 
-
-        const status =
-            document.createElement("div");
-
-        status.className =
-            `status ${statusClass(order.status)}`;
-
-        status.textContent =
-            statusText(order.status);
-
-
-        top.appendChild(tableBox);
-
-        top.appendChild(status);
+            status.textContent =
+                statusText(
+                    order.status
+                );
 
 
-        /* ITEMS */
+            top.appendChild(
+                tableBox
+            );
 
-        const itemsBox =
-            document.createElement("div");
-
-        itemsBox.className =
-            "order-items";
-
-
-        const items =
-            orderItems.filter(
-                item =>
-                    String(item.order_id) ===
-                    String(order.id)
+            top.appendChild(
+                status
             );
 
 
-        if(!items.length){
+            /* ITEMS */
 
-            const emptyItem =
-                document.createElement("div");
+            const itemsBox =
+                document.createElement(
+                    "div"
+                );
 
-            emptyItem.className =
-                "order-item";
+            itemsBox.className =
+                "order-items";
 
-            emptyItem.textContent =
-                "Ürün bilgisi bulunamadı.";
 
-            itemsBox.appendChild(
-                emptyItem
-            );
+            const items =
+                orderItems.filter(
+                    item =>
+                        String(
+                            item.order_id
+                        ) ===
+                        String(
+                            order.id
+                        )
+                );
 
-        }else{
 
-            items.forEach(item => {
+            if(!items.length){
 
-                const row =
-                    document.createElement("div");
+                const emptyItem =
+                    document.createElement(
+                        "div"
+                    );
 
-                row.className =
+                emptyItem.className =
                     "order-item";
 
-
-                const name =
-                    document.createElement("span");
-
-                name.className =
-                    "order-item-name";
-
-                name.textContent =
-                    item.product_name;
+                emptyItem.textContent =
+                    "Ürün bilgisi bulunamadı.";
 
 
-                const qty =
-                    document.createElement("span");
+                itemsBox.appendChild(
+                    emptyItem
+                );
 
-                qty.className =
-                    "order-item-qty";
+            }else{
 
-                qty.textContent =
-                    `${item.quantity} × ${formatPrice(item.unit_price)}`;
+                items.forEach(
+                    item => {
 
+                        const row =
+                            document.createElement(
+                                "div"
+                            );
 
-                row.appendChild(name);
-
-                row.appendChild(qty);
-
-                itemsBox.appendChild(row);
-
-            });
-
-        }
+                        row.className =
+                            "order-item";
 
 
-        /* BOTTOM */
+                        const name =
+                            document.createElement(
+                                "span"
+                            );
 
-        const bottom =
-            document.createElement("div");
+                        name.className =
+                            "order-item-name";
 
-        bottom.className =
-            "order-bottom";
-
-
-        const payment =
-            document.createElement("div");
-
-        payment.className =
-            "payment";
-
-        payment.textContent =
-            `Ödeme: ${order.payment_method || "-"}`;
+                        name.textContent =
+                            item.product_name;
 
 
-        const total =
-            document.createElement("div");
+                        const qty =
+                            document.createElement(
+                                "span"
+                            );
 
-        total.className =
-            "total";
+                        qty.className =
+                            "order-item-qty";
 
-        total.textContent =
-            formatPrice(order.total);
-
-
-        bottom.appendChild(payment);
-
-        bottom.appendChild(total);
+                        qty.textContent =
+                            `${item.quantity} × ${formatPrice(item.unit_price)}`;
 
 
-        /* ACTIONS */
+                        row.appendChild(
+                            name
+                        );
 
-        const actions =
-            document.createElement("div");
-
-        actions.className =
-            "order-actions";
+                        row.appendChild(
+                            qty
+                        );
 
 
-        if(order.status === "pending"){
+                        itemsBox.appendChild(
+                            row
+                        );
 
-            actions.appendChild(
-                createActionButton(
-                    "Hazırlanıyor",
-                    () =>
-                        updateOrderStatus(
-                            order.id,
-                            "preparing"
-                        )
-                )
+                    }
+                );
+
+            }
+
+
+            /* BOTTOM */
+
+            const bottom =
+                document.createElement(
+                    "div"
+                );
+
+            bottom.className =
+                "order-bottom";
+
+
+            const payment =
+                document.createElement(
+                    "div"
+                );
+
+            payment.className =
+                "payment";
+
+            payment.textContent =
+                `Ödeme: ${order.payment_method || "-"}`;
+
+
+            const total =
+                document.createElement(
+                    "div"
+                );
+
+            total.className =
+                "total";
+
+            total.textContent =
+                formatPrice(
+                    order.total
+                );
+
+
+            bottom.appendChild(
+                payment
+            );
+
+            bottom.appendChild(
+                total
+            );
+
+
+            /* ACTIONS */
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "order-actions";
+
+
+            if(
+                order.status === "pending"
+            ){
+
+                actions.appendChild(
+                    createActionButton(
+                        "Hazırlanıyor",
+                        () =>
+                            updateOrderStatus(
+                                order.id,
+                                "preparing"
+                            )
+                    )
+                );
+
+            }
+
+
+            if(
+                order.status === "preparing"
+            ){
+
+                actions.appendChild(
+                    createActionButton(
+                        "Hazır",
+                        () =>
+                            updateOrderStatus(
+                                order.id,
+                                "ready"
+                            )
+                    )
+                );
+
+            }
+
+
+            if(
+                order.status === "ready"
+            ){
+
+                actions.appendChild(
+                    createActionButton(
+                        "Teslim Edildi",
+                        () =>
+                            updateOrderStatus(
+                                order.id,
+                                "delivered"
+                            )
+                    )
+                );
+
+            }
+
+
+            if(
+                order.status !== "delivered" &&
+                order.status !== "cancelled" &&
+                order.status !== "completed"
+            ){
+
+                actions.appendChild(
+                    createActionButton(
+                        "İptal",
+                        () =>
+                            updateOrderStatus(
+                                order.id,
+                                "cancelled"
+                            )
+                    )
+                );
+
+            }
+
+
+            card.appendChild(
+                top
+            );
+
+            card.appendChild(
+                itemsBox
+            );
+
+            card.appendChild(
+                bottom
+            );
+
+            card.appendChild(
+                actions
+            );
+
+
+            container.appendChild(
+                card
             );
 
         }
-
-
-        if(order.status === "preparing"){
-
-            actions.appendChild(
-                createActionButton(
-                    "Hazır",
-                    () =>
-                        updateOrderStatus(
-                            order.id,
-                            "ready"
-                        )
-                )
-            );
-
-        }
-
-
-        if(order.status === "ready"){
-
-            actions.appendChild(
-                createActionButton(
-                    "Teslim Edildi",
-                    () =>
-                        updateOrderStatus(
-                            order.id,
-                            "delivered"
-                        )
-                )
-            );
-
-        }
-
-
-        if(
-            order.status !== "delivered" &&
-            order.status !== "cancelled"
-        ){
-
-            actions.appendChild(
-                createActionButton(
-                    "İptal",
-                    () =>
-                        updateOrderStatus(
-                            order.id,
-                            "cancelled"
-                        )
-                )
-            );
-
-        }
-
-
-        card.appendChild(top);
-
-        card.appendChild(itemsBox);
-
-        card.appendChild(bottom);
-
-        card.appendChild(actions);
-
-
-        container.appendChild(card);
-
-    });
+    );
 
 }
 
@@ -1625,7 +2402,9 @@ function createActionButton(
 ){
 
     const button =
-        document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
 
     button.type =
@@ -1653,6 +2432,7 @@ function createActionButton(
 
 /* =========================================================
    UPDATE ORDER STATUS
+   AUTHENTICATED REQUEST
 ========================================================= */
 
 async function updateOrderStatus(
@@ -1662,24 +2442,25 @@ async function updateOrderStatus(
 
     try{
 
-        await supabaseFetch(
-            `/rest/v1/orders?id=eq.${encodeURIComponent(orderId)}`,
-            {
-                method:"PATCH",
-
-                headers:{
-                    "Prefer":
-                        "return=minimal"
-                },
-
-                body:JSON.stringify({
-
-                    status:
-                        status
-
+        const {
+            error
+        } =
+            await supabase
+                .from("orders")
+                .update({
+                    status:status
                 })
-            }
-        );
+                .eq(
+                    "id",
+                    orderId
+                );
+
+
+        if(error){
+
+            throw error;
+
+        }
 
 
         showToast(
@@ -1715,15 +2496,50 @@ async function startApp(){
 
     try{
 
+        const {
+            data,
+            error
+        } =
+            await supabase.auth
+                .getSession();
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        if(
+            !data ||
+            !data.session
+        ){
+
+            showLogin();
+
+            return;
+
+        }
+
+
+        /*
+         * İlk veri yükleme
+         */
+
         await Promise.all([
             loadOrders(),
             loadWaiterRequests()
         ]);
 
 
+        startRefresh();
+
+
         console.log(
             "NIGHT ORDER STAFF PANEL AKTİF"
         );
+
 
     }catch(error){
 
@@ -1754,38 +2570,56 @@ async function startApp(){
 
 
 /* =========================================================
-   INITIAL LOAD
+   INITIAL AUTH CHECK
 ========================================================= */
 
-startApp();
+(async function(){
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabase.auth
+                .getSession();
 
 
-/* =========================================================
-   AUTO REFRESH
-========================================================= */
+        if(error){
 
-setInterval(
-    async () => {
-
-        try{
-
-            await Promise.all([
-                loadOrders(),
-                loadWaiterRequests()
-            ]);
-
-        }catch(error){
-
-            console.error(
-                "Otomatik güncelleme hatası:",
-                error
-            );
+            throw error;
 
         }
 
-    },
-    5000
-);
+
+        if(
+            data &&
+            data.session
+        ){
+
+            showApp();
+
+            await startApp();
+
+        }else{
+
+            showLogin();
+
+        }
+
+
+    }catch(error){
+
+        console.error(
+            "AUTH BAŞLANGIÇ HATASI:",
+            error
+        );
+
+        showLogin();
+
+    }
+
+})();
 
 </script>
 
