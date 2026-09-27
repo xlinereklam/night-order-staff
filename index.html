@@ -1554,7 +1554,7 @@ async function loadOrders(){
         data,
         error
     } =
-        await supabase
+        await db
             .from("orders")
             .select(
                 "id,table_id,status,payment_method,note,total,created_at"
@@ -1614,7 +1614,7 @@ async function loadOrderItems(){
         data,
         error
     } =
-        await supabase
+        await db
             .from("order_items")
             .select(
                 "order_id,product_name,quantity,unit_price,total"
@@ -1653,7 +1653,7 @@ async function loadWaiterRequests(){
         data,
         error
     } =
-        await supabase
+        await db
             .from("service_requests")
             .select(
                 "id,table_id,request_type,status,created_at"
@@ -1863,7 +1863,7 @@ async function handleWaiterRequest(id){
             data,
             error
         } =
-            await supabase
+            await db
                 .rpc(
                     "handle_waiter_request",
                     {
@@ -2440,7 +2440,7 @@ async function updateOrderStatus(
         const {
             error
         } =
-            await supabase
+            await db
                 .from("orders")
                 .update({
                     status:status
