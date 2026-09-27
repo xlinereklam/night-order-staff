@@ -1103,8 +1103,37 @@ button{
 <script>
 
 /* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    "https://qkevbwcwsbgftvgxgasy.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_l39-lwrk--GgVkKDFEoPIA_1pmKKPTu";
+
+const {
+    createClient
+} = window.supabase;
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =========================================================
    STATE
 ========================================================= */
+
+let orders = [];
+
+let orderItems = [];
+
+let waiterRequests = [];
+
+let refreshTimer = null;
 
 let orders = [];
 
