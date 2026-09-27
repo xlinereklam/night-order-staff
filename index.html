@@ -1106,17 +1106,17 @@ button{
    SUPABASE
 ========================================================= */
 
-const SUPABASE_URL =
-    "https://qkevbwcwsbgftvgxgasy.supabase.co";
+const db_URL =
+    "https://qkevbwcwsbgftvgxgasy.db.co";
 
-const SUPABASE_ANON_KEY =
+const db_ANON_KEY =
     "sb_publishable_l39-lwrk--GgVkKDFEoPIA_1pmKKPTu";
 
 const {
     createClient
 } = window.supabase;
 
-const supabase =
+const db =
     createClient(
         SUPABASE_URL,
         SUPABASE_ANON_KEY
@@ -1317,7 +1317,7 @@ function startRefresh(){
                 const {
                     data
                 } =
-                    await supabase.auth
+                    await db.auth
                         .getSession();
 
 
@@ -1395,7 +1395,7 @@ loginForm.addEventListener(
                 data,
                 error
             } =
-                await supabase.auth
+                await db.auth
                     .signInWithPassword({
                         email,
                         password
@@ -1473,7 +1473,7 @@ logoutButton.addEventListener(
         const {
             error
         } =
-            await supabase.auth
+            await db.auth
                 .signOut();
 
 
@@ -1520,7 +1520,7 @@ logoutButton.addEventListener(
    AUTH STATE
 ========================================================= */
 
-supabase.auth.onAuthStateChange(
+db.auth.onAuthStateChange(
     async (
         event,
         session
@@ -2499,7 +2499,7 @@ async function startApp(){
             data,
             error
         } =
-            await supabase.auth
+            await db.auth
                 .getSession();
 
 
@@ -2580,7 +2580,7 @@ async function startApp(){
             data,
             error
         } =
-            await supabase.auth
+            await db.auth
                 .getSession();
 
 
