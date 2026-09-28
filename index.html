@@ -1559,7 +1559,11 @@ async function loadOrders(){
             .select(
                 "id,table_id,status,payment_method,note,total,created_at"
             )
-            .order(
+            .is(
+    "archived_at",
+    null
+)
+        .order(
                 "created_at",
                 {
                     ascending:false
@@ -1657,6 +1661,10 @@ async function loadWaiterRequests(){
             .from("service_requests")
             .select(
                 "id,table_id,request_type,status,created_at"
+            )
+            .is(
+                "archived_at",
+                null
             )
             .eq(
                 "status",
