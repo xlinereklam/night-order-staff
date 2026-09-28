@@ -2446,22 +2446,37 @@ async function updateOrderStatus(
     try{
 
         const {
+            data,
             error
         } =
             await db
-                .from("orders")
-                .update({
-                    status:status
-                })
-                .eq(
-                    "id",
-                    orderId
+                .rpc(
+                    "update_order_status_secure",
+                    {
+                        p_order_id:
+                            orderId,
+
+                        p_status:
+                            status
+                    }
                 );
 
 
         if(error){
 
             throw error;
+
+        }
+
+
+        if(
+            !data ||
+            data.success !== true
+        ){
+
+            throw new Error(
+                "Sipariş durumu güncellenemedi."
+            );
 
         }
 
